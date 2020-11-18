@@ -4,6 +4,10 @@ import "./todo-list-item.css";
 // для работы с внутренним состоянием используем Class
 
 export default class TodoListItem extends Component {
+  onLabelClick = () => {
+    console.log(`Done: ${this.props.label}`);
+  };
+
   render() {
     // деструктуризация - достать значения из объекта
     // который передается в качестве аргумента функции
@@ -16,7 +20,11 @@ export default class TodoListItem extends Component {
 
     return (
       <span className="todo-list-item">
-        <span className="todo-list-item-label" style={style}>
+        <span
+          className="todo-list-item-label"
+          style={style}
+          onClick={this.onLabelClick}
+        >
           {label}
         </span>
 
