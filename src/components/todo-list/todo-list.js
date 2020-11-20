@@ -4,7 +4,7 @@ import TodoListItem from "../todo-list-item";
 import "./todo-list.css";
 
 // onDeleted получаем сверху из app.js
-const TodoList = ({ todos, onDeleted }) => {
+const TodoList = ({ todos, onDeleted, onToggleImportant, onToggleDone }) => {
   const elements = todos.map((item) => {
     // JSX занимает несколько строк кода поэтому оборачиваем в ()
     const { id, ...itemProps } = item;
@@ -12,7 +12,12 @@ const TodoList = ({ todos, onDeleted }) => {
       // spread - позволяет разложить на коллекцию ключей и значений
       // взять каждое св-во из item и передать в качестве атрибута со значением
       <li key={id} className="list-group-item">
-        <TodoListItem {...itemProps} onDeleted={() => onDeleted(id)} />
+        <TodoListItem
+          {...itemProps}
+          onDeleted={() => onDeleted(id)}
+          onToggleImportant={() => onToggleImportant(id)}
+          onToggleDone={() => onToggleDone(id)}
+        />
       </li>
     );
   });

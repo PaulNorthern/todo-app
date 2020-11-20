@@ -4,31 +4,17 @@ import "./todo-list-item.css";
 // для работы с внутренним состоянием используем Class
 
 export default class TodoListItem extends Component {
-  // внутр. состояние
-  state = { done: false, important: false };
-
-  onLabelClick = () => {
-    // console.log(`Done: ${this.props.label}`);
-    this.setState(({ done }) => {
-      return {
-        done: !done,
-      };
-    });
-  };
-
-  onMarkImportant = () => {
-    this.setState(({ important }) => {
-      return {
-        important: !important,
-      };
-    });
-  };
-
   render() {
     // деструктуризация - достать значения из объекта
     // который передается в качестве аргумента функции
-    const { label, onDeleted } = this.props;
-    const { done, important } = this.state;
+    const {
+      label,
+      onDeleted,
+      onToggleImportant,
+      onToggleDone,
+      important,
+      done,
+    } = this.props;
 
     let classNames = "todo-list-item";
 
@@ -42,14 +28,14 @@ export default class TodoListItem extends Component {
 
     return (
       <span className={classNames}>
-        <span className="todo-list-item-label" onClick={this.onLabelClick}>
+        <span className="todo-list-item-label" onClick={onToggleDone}>
           {label}
         </span>
 
         <button
           type="button"
           className="btn btn-outline-success btn-sm float-right"
-          onClick={this.onMarkImportant}
+          onClick={onToggleImportant}
         >
           <i className="fa fa-exclamation" />
         </button>
